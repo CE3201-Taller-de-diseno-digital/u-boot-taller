@@ -2037,6 +2037,11 @@ config ARCH_OCTEONTX2
 	select SYS_PCI_64BIT if PCI
 	imply OF_HAS_PRIOR_STAGE
 
+config TARGET_TALLER
+	bool "Support CE3201 Taller"
+	select DM
+	select SYS_ARM_CACHE_WRITETHROUGH
+
 config TARGET_THUNDERX_88XX
 	bool "Support ThunderX 88xx"
 	select ARM64
@@ -2341,6 +2346,7 @@ source "board/grinn/chiliboard/Kconfig"
 source "board/hisilicon/hikey/Kconfig"
 source "board/hisilicon/hikey960/Kconfig"
 source "board/hisilicon/poplar/Kconfig"
+source "board/itcr/taller/Kconfig"
 source "board/isee/igep003x/Kconfig"
 source "board/kontron/sl28/Kconfig"
 source "board/myir/mys_6ulx/Kconfig"
