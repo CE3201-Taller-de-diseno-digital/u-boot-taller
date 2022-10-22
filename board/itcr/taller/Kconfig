@@ -1,0 +1,18 @@
+if TARGET_TALLER
+
+config CPU_ARM810
+	default y
+
+config SYS_BOARD
+	default "taller"
+
+config SYS_VENDOR
+	default "itcr"
+
+config SYS_SOC
+	default "ce3201"
+
+config SYS_CONFIG_NAME
+	default "taller"
+
+endif
