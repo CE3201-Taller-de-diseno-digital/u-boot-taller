@@ -7,6 +7,7 @@ endif
 
 # This selects which instruction set is used.
 arch-$(CONFIG_CPU_ARM720T)	=-march=armv4
+arch-$(CONFIG_CPU_ARM810)	=-mcpu=arm810
 arch-$(CONFIG_CPU_ARM920T)	=-march=armv4t
 arch-$(CONFIG_CPU_ARM926EJS)	=-march=armv5te
 arch-$(CONFIG_CPU_ARM946ES)	=-march=armv5te
@@ -35,6 +36,7 @@ arch-y := $(arch-y)
 
 # This selects how we optimise for the processor.
 tune-$(CONFIG_CPU_ARM720T)	=-mtune=arm7tdmi
+tune-$(CONFIG_CPU_ARM810)	=-mtune=arm810
 tune-$(CONFIG_CPU_ARM920T)	=
 tune-$(CONFIG_CPU_ARM926EJS)	=
 tune-$(CONFIG_CPU_ARM946ES)	=

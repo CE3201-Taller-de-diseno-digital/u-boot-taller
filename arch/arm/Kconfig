@@ -280,6 +280,11 @@ config CPU_ARM720T
 	select SYS_CACHE_SHIFT_5
 	imply SYS_ARM_MMU
 
+config CPU_ARM810
+	bool
+	select SYS_CACHE_SHIFT_5
+	imply SYS_ARM_MMU
+
 config CPU_ARM920T
 	bool
 	select SYS_CACHE_SHIFT_5
@@ -332,6 +337,7 @@ config CPU_V7R
 
 config SYS_CPU
 	default "arm720t" if CPU_ARM720T
+	default "arm810" if CPU_ARM810
 	default "arm920t" if CPU_ARM920T
 	default "arm926ejs" if CPU_ARM926EJS
 	default "arm946es" if CPU_ARM946ES
@@ -345,6 +351,7 @@ config SYS_CPU
 config SYS_ARM_ARCH
 	int
 	default 4 if CPU_ARM720T
+	default 4 if CPU_ARM810
 	default 4 if CPU_ARM920T
 	default 5 if CPU_ARM926EJS
 	default 5 if CPU_ARM946ES
