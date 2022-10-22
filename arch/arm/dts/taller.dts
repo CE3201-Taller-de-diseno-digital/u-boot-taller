@@ -1,0 +1,94 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Copyright (C) 2015 Altera Corporation. All rights reserved.
+ * Copyright (C) 2022 Alejandro Soto <alejandro@34project.org>
+ */
+
+/dts-v1/;
+
+/ {
+	model = "Proyecto Final CE3201";
+	compatible = "itcr,ce3201";
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu {
+			device_type = "cpu";
+			compatible = "arm,arm810";
+			clock-frequency = <100000000>;
+		};
+	};
+
+	memory {
+		device_type = "memory";
+		reg = <0x0000000 0x20000000>;
+	};
+
+	soc {
+		device_type = "soc";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "altr,avalon", "simple-bus";
+		bus-frequency = <50000000>;
+		interrupt-parent = <&intc>;
+		ranges;
+
+		sys_pll {
+			compatible = "altr,pll-1.0";
+			#clock-cells = <1>;
+
+			pll_cpu: cpu {
+				compatible = "fixed-clock";
+				#clock-cells = <0>;
+				clock-frequency = <100000000>;
+				clock-output-names = "sys_pll-cpu";
+			};
+
+			pll_bus: bus {
+				compatible = "fixed-clock";
+				#clock-cells = <0>;
+				clock-frequency = <50000000>;
+				clock-output-names = "sys_pll-bus";
+			};
+
+			pll_pixclk: pixclk {
+				compatible = "fixed-clock";
+				#clock-cells = <0>;
+				clock-frequency = <25175000>;
+				clock-output-names = "sys_pll-pixclk";
+			};
+		};
+
+		timer@30000000 {
+			compatible = "altr,timer-1.0";
+			reg = <0x30000000 0x00000020>;
+			interrupts = <0>;
+			clock-frequency = <50000000>;
+		};
+
+		ttyJ0: serial@30001000 {
+			compatible = "altr,juart-1.0";
+			reg = <0x30001000 0x00000008>;
+			interrupts = <1>;
+		};
+
+		intc: intc@30002000 {
+			//TODO
+			compatible = "itcr,taller-intc";
+			//TODO
+			reg = <0x30002000 0x0>;
+			interrupt-controller;
+			#interrupt-cells = <1>;
+		};
+	};
+
+	chosen {
+		//TODO
+		//bootargs = "debug earlycon console=ttyJ0";
+		stdout-path = &ttyJ0;
+	};
+};
