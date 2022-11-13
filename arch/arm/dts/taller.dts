@@ -63,26 +63,86 @@
 			};
 		};
 
-		timer@30000000 {
+		ttyJ0: serial@30000000 {
+			compatible = "altr,juart-1.0";
+			reg = <0x30000000 0x00000008>;
+			interrupts = <1>;
+		};
+
+		led_pio: gpio@30010000 {
+			compatible = "altr,pio-1.0";
+			reg = <0x30010000 0x00000010>;
+			altr,ngpio = <8>;
+			resetvalue = <15>;
+
+			/* Según binding:
+			 * - #gpio-cells: Should be 2
+			 *   - The first cell is the gpio offset number.
+			 *   - The second cell is reserved and is currently unused.
+			 */
+			#gpio-cells = <2>;
+			gpio-controller;
+			gpio-bank-name = "led";
+		};
+
+		timer@30020000 {
 			compatible = "altr,timer-1.0";
-			reg = <0x30000000 0x00000020>;
+			reg = <0x30020000 0x00000020>;
 			interrupts = <0>;
 			clock-frequency = <50000000>;
 		};
 
-		ttyJ0: serial@30001000 {
-			compatible = "altr,juart-1.0";
-			reg = <0x30001000 0x00000008>;
-			interrupts = <1>;
-		};
-
-		intc: intc@30002000 {
+		intc: intc@30003000 {
 			//TODO
 			compatible = "itcr,taller-intc";
 			//TODO
-			reg = <0x30002000 0x0>;
+			reg = <0x30030000 0x0>;
 			interrupt-controller;
 			#interrupt-cells = <1>;
+		};
+
+		leds {
+			compatible = "gpio-leds";
+
+			fpga0 {
+				label = "fpga_led0";
+				gpios = <&led_pio 0 1>;
+			};
+
+			fpga1 {
+				label = "fpga_led1";
+				gpios = <&led_pio 1 1>;
+			};
+
+			fpga2 {
+				label = "fpga_led2";
+				gpios = <&led_pio 2 1>;
+			};
+
+			fpga3 {
+				label = "fpga_led3";
+				gpios = <&led_pio 3 1>;
+			};
+
+			fpga4 {
+				label = "fpga_led4";
+				gpios = <&led_pio 4 1>;
+			};
+
+			fpga5 {
+				label = "fpga_led5";
+				gpios = <&led_pio 5 1>;
+			};
+
+			fpga6 {
+				label = "fpga_led6";
+				gpios = <&led_pio 6 1>;
+			};
+
+			fpga7 {
+				label = "fpga_led7";
+				gpios = <&led_pio 7 1>;
+			};
 		};
 	};
 
