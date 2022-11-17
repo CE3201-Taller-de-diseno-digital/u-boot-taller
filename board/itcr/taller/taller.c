@@ -11,5 +11,6 @@ int board_init(void)
 
 int dram_init(void)
 {
+	gd->ram_size = 512 << 20;
 	return 0;
 }
